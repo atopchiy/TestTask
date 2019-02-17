@@ -1,0 +1,9 @@
+.edit-button{
+    min-width: 5em;
+}
+.error-block{
+    position: absolute;
+    top:0px;
+    right:2em;
+    color:red;
+}

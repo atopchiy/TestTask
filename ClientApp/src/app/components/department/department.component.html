@@ -1,0 +1,72 @@
+﻿<div  *ngIf="this.showError" class="error-block">There was error in adding department, try another name</div>
+<h1>Department List</h1>
+<input type="button" value="Add New Department" class="btn btn-info" (click)="add()" />
+<input type="text" (input) = "this.loadDepartments()" [(ngModel)] = "this.paging.Search" 
+            placeholder="Find department by name" class="form-control mt-3">
+<table *ngIf="tableMode; else create" class="table table-striped">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+            
+        <tr *ngFor="let p of this.paging.Items">
+            <ng-template [ngIf]="department?.Id != p.Id" [ngIfElse]="edit">
+                
+                <td>{{p?.Name}}</td>
+                <td>
+                    <div fxLayout="row" fxLayoutAlign="space-evenly center">
+                    <button class="btn btn-md btn-primary edit-button" (click)="editDepartment(p)">Edit</button>
+                    <button class="btn btn-md btn-danger" (click)="delete(p)">Delete</button>
+                    <button class="btn btn-ms btn-warning" routerLink="/employee/{{p.Id}}">Show employee list</button>
+                    
+                </div>
+                </td>
+            </ng-template>
+        </tr>
+        <button class="btn btn-md" [disabled]="!this.paging.HasPreviousPage" (click) = "goToPreviousStep()">Previous</button>
+        <button class="btn btn-md" [disabled]= "!this.paging.HasNextPage"(click) = "goToNextStep()">Next</button>
+    </tbody>
+</table>
+
+
+<!--шаблон для редактирования-->
+<ng-template #edit>
+<form #f="ngForm" (ngSubmit)="f.form.valid && save()" novalidate>
+   
+    <div class="form-group">
+    <label>Name</label>
+    <input type="text" [(ngModel)]="department.Name" class="form-control" name="firstName" 
+    #depName="ngModel" name="depName" [ngClass]="{ 'is-invalid': f.submitted && 
+        depName.invalid }" required/>
+    </div>
+    <div *ngIf="f.submitted && depName.invalid" class="invalid-feedback">
+        <div *ngIf="depName.errors.required">Department Name is required</div>
+    </div>
+        <button  class="btn btn-success">Save</button>
+        <input type="button" value="Edit" (click)="cancel()" class="btn btn-sm btn-warning" />
+    
+</form>
+</ng-template>
+
+<!--шаблон для добавления-->
+<ng-template #create>
+    <form #f="ngForm" (ngSubmit)="f.form.valid && save()" novalidate autocomplete="on">
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" [(ngModel)]="department.Name" class="form-control" #depName="ngModel" name="depName" [ngClass]="{ 'is-invalid': f.submitted && 
+        depName.invalid }" required/>
+        <div *ngIf="f.submitted && depName.invalid" class="invalid-feedback">
+            <div *ngIf="depName.errors.required">Department Name is required</div>
+        </div>
+        
+    </div>
+    
+    <div>
+        <button  class="btn btn-success">Save</button>
+        <input type="button" value="Cancel" (click)="cancel()" class="btn btn-warning" />
+    </div>
+    </form>
+</ng-template>
