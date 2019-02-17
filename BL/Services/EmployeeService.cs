@@ -40,7 +40,9 @@ namespace BL.Services
             if (search == null)
                 search = "";
             return _employeeRepository.GetList().Where(emp =>
-            emp.Name.ToLower().Contains(search.ToLower())).ToList();
+            emp.Name.ToLower().Contains(search.ToLower())
+            || emp.Email.ToLower().Contains(search.ToLower()) || emp.Salary.ToString().Contains(search)
+            || emp.Birth.ToString().Contains(search)).ToList();
         }
     }
 }

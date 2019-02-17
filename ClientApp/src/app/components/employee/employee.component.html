@@ -2,7 +2,7 @@
 <h1>Employee List</h1>
 <input type="button" value="Add New Employee" class="btn btn-info" (click)="add()" />
 <input type="text" (input) = "this.loadEmployees()" [(ngModel)] = "this.paging.Search" 
-            placeholder="Find employee by name" class="form-control mt-3">
+            placeholder="Find employee by name, email, birthday or salary" class="form-control mt-3">
 <table *ngIf="tableMode; else create" class="table table-striped">
     <thead>
         <tr>
