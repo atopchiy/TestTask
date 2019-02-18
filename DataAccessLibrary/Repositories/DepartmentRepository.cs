@@ -23,7 +23,7 @@ namespace DataAccessLibrary.Repositories
 
         public Department GetById(int id)
         {
-            return _context.Departments.Single(dep => dep.Id == id);
+            return _context.Departments.SingleOrDefault(dep => dep.Id == id);
         }
 
         public bool Delete(int id)

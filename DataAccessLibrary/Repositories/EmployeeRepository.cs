@@ -44,6 +44,7 @@ namespace DataAccessLibrary.Repositories
                 employee.Birth = subj.Birth;
                 employee.DepartmentId = subj.DepartmentId;
                 employee.Email = subj.Email;
+                employee.Salary = subj.Salary;
                 _context.SaveChanges();
                 return true;
             }

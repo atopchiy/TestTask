@@ -42,7 +42,7 @@ namespace TestCRUDWeb.Controllers
         {
             return _employeeService.Add(_mapper.Map<Employee>(employee));
         }
-        [HttpDelete]
+)        [HttpDelete("{id}")]
         public bool DeleteEmployee(int id)
         {
             _employeeService.Delete(id);
